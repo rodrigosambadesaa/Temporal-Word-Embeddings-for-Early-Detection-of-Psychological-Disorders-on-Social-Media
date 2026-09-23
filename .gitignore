@@ -183,3 +183,10 @@ main*.py
 data/**/*
 cache/**/*
 citius-irlab/**/*
+
+# Generated experiment output
+out.txt
+*.out
+
+# Local coverage artifacts
+coverage.json
