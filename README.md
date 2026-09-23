@@ -65,6 +65,40 @@ The following table presents the comparative performance of the original and Lab
 
 ---
 
+## Reproducible development setup
+
+The eRisk datasets are not redistributed by this repository. Place the authorized,
+preprocessed CSV files under `data/` using the filenames referenced by the experiment
+scripts.
+
+```bash
+conda env create -f environment.yaml
+conda activate f3-deltas
+pytest -q
+```
+
+The repository now includes focused regression tests for ERDE and the temporal-distance
+functions, plus GitHub Actions CI on Python 3.11 and 3.12.
+
+### Important metric fixes in this fork
+
+- ERDE is evaluated at user level without exploding chunk-level predictions into
+  individual texts.
+- The false-positive ERDE cost is derived from positive-user prevalence.
+- Minkowski p=3 no longer applies an erroneous second cube root.
+- Jensen-Shannon divergence converts signed embedding vectors to probability
+  distributions before computing KL terms.
+- Wasserstein empirical CDFs are normalized.
+- TWEC slice training is actually executed inside the thread pool and avoids nested
+  Word2Vec CPU oversubscription.
+
+These changes can alter previously reported ERDE values. Published paper results above
+are retained for reference and should not be presented as recomputed results from this
+fork until the full datasets are rerun.
+
+
+---
+
 ## 📄 Citation
 
 If you use our work, please cite it as follows:
